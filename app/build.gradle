@@ -1,28 +1,101 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion versions.compileSdk
     defaultConfig {
         applicationId "com.android.tech.trendingrepos"
-        minSdkVersion 19
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code
+        versionName versions.name
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
     }
+
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            useProguard false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_BASE_URL', "\"http://api.apixu.com/v1/\""
         }
+
+        release {
+            minifyEnabled true
+            useProguard true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_BASE_URL', "\"https://github-trending-api.now.sh/\""
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility versions.sourceCompat
+        targetCompatibility versions.targetCompat
     }
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.2.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    // Android Support Libraries
+    implementation deps.support.appcompat
+    implementation deps.support.design
+    implementation deps.support.cardview
+    implementation deps.support.recyclerview
+    implementation deps.support.annotations
+    implementation deps.support.legacy
+
+    // Kotlin
+    implementation deps.kotlin.stdlib
+    implementation deps.kotlin.reflect
+
+    // Dagger
+    implementation deps.google.dagger
+    kapt deps.google.compiler
+    implementation deps.google.dagger_support
+    kapt deps.google.processor
+
+    // Rx
+    implementation deps.reactivex.rxjava
+    implementation deps.reactivex.rxandroid
+    implementation deps.reactivex.rxkotlin
+
+    // Retrofit and OkHttp
+    implementation deps.square.retrofit
+    implementation deps.square.gsonConvertor
+    implementation deps.square.gson
+    implementation deps.square.rxjava2
+    implementation deps.square.okhttp
+
+    // Android Architecture Component
+    implementation deps.androidarch.extensions
+    implementation deps.androidarch.viewmodel
+    implementation deps.androidarch.livedata
+    implementation deps.androidarch.common
+    implementation deps.androidarch.reactivestreams
+
+    // Room Db
+    implementation deps.room.rxjava2
+    implementation deps.room.runtime
+    kapt deps.room.compiler
+    androidTestImplementation deps.room.testing
+//    kapt "androidx.room:room-compiler:2.1.0-alpha04"
+
+    // Others
+    implementation deps.others.constraint
+    implementation deps.others.glide
+
+    //Test Cases
+    testImplementation deps.test.junit
+    androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.espresso
+
+}
+
+repositories {
+    mavenCentral()
 }
