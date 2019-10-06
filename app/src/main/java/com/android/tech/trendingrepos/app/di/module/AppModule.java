@@ -1,10 +1,9 @@
-package com.android.tech.trendingrepos.di.module;
+package com.android.tech.trendingrepos.app.di.module;
 
-import android.app.Application;
 import android.content.Context;
 
-import com.android.tech.trendingrepos.RepoApplication;
-import com.android.tech.trendingrepos.di.component.AppComponent;
+import com.android.tech.trendingrepos.app.RepoApplication;
+import com.android.tech.trendingrepos.app.di.component.AppComponent;
 
 import dagger.Binds;
 import dagger.Module;

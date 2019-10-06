@@ -1,7 +1,7 @@
-package com.android.tech.trendingrepos;
+package com.android.tech.trendingrepos.app;
 
-import com.android.tech.trendingrepos.di.component.AppComponent;
-import com.android.tech.trendingrepos.di.component.DaggerAppComponent;
+import com.android.tech.trendingrepos.app.di.component.AppComponent;
+import com.android.tech.trendingrepos.app.di.component.DaggerAppComponent;
 
 import dagger.android.AndroidInjector;
 import dagger.android.support.DaggerApplication;

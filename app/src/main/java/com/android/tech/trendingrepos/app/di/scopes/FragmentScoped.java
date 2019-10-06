@@ -1,4 +1,4 @@
-package com.android.tech.trendingrepos.di.scopes;
+package com.android.tech.trendingrepos.app.di.scopes;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

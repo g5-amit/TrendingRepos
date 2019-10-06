@@ -1,7 +1,7 @@
-package com.android.tech.trendingrepos.di.scopes;
+package com.android.tech.trendingrepos.app.di.scopes;
 
 
-import com.android.tech.trendingrepos.di.component.AppComponent;
+import com.android.tech.trendingrepos.app.di.component.AppComponent;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
