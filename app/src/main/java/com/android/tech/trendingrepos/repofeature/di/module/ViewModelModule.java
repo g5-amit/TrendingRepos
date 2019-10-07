@@ -17,7 +17,7 @@ public abstract class ViewModelModule {
     @Binds
     @IntoMap
     @ViewModelKey(TrendingRepoViewModel.class)
-    abstract ViewModel bindQuakesViewModel(TrendingRepoViewModel ratesViewModel);
+    abstract ViewModel bindTrendingRepoViewModel(TrendingRepoViewModel ratesViewModel);
 
     @Binds
     @AppScoped
