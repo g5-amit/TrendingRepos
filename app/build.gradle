@@ -88,6 +88,7 @@ dependencies {
     // Others
     implementation deps.others.constraint
     implementation deps.others.glide
+    implementation deps.others.material
 
     //Test Cases
     testImplementation deps.test.junit

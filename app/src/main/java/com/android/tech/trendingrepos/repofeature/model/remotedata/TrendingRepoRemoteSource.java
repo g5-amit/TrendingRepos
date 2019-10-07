@@ -33,12 +33,32 @@ public class TrendingRepoRemoteSource implements IRemoteTrendingRepo {
     @Override
     public Single<List<TrendingRepoEntity>> getTrendingRepoList() {
         return mApiService.getRemoteTrendingRepos()
-                .map(this::parseWeatherData);
+                .map(this::parseTrendingRepoData);
 
     }
 
-    private List<TrendingRepoEntity> parseWeatherData(GitHubRepo gitHubRepo) {
-        return null;
+    private List<TrendingRepoEntity> parseTrendingRepoData(List<GitHubRepo> gitHubRepoList) {
+        List<TrendingRepoEntity> trendingRepoEntityList = new ArrayList<>();
+
+        for(GitHubRepo gitRepo: gitHubRepoList){
+            TrendingRepoEntity trendingRepoEntity = new TrendingRepoEntity();
+            trendingRepoEntity.setAuthor(gitRepo.getAuthor());
+            trendingRepoEntity.setAvatar(gitRepo.getAvatar());
+            trendingRepoEntity.setBuiltBy(gitRepo.getBuiltBy());
+            trendingRepoEntity.setCurrentPeriodStars(gitRepo.getCurrentPeriodStars());
+            trendingRepoEntity.setDescription(gitRepo.getDescription());
+            trendingRepoEntity.setForks(gitRepo.getForks());
+            trendingRepoEntity.setLanguage(gitRepo.getLanguage());
+            trendingRepoEntity.setLanguageColor(gitRepo.getLanguageColor());
+            trendingRepoEntity.setStars(gitRepo.getStars());
+            trendingRepoEntity.setName(gitRepo.getName());
+            trendingRepoEntity.setUrl(gitRepo.getUrl());
+            trendingRepoEntity.setTimeStamp(System.currentTimeMillis());
+
+            trendingRepoEntityList.add(trendingRepoEntity);
+        }
+
+        return trendingRepoEntityList;
     }
 
 

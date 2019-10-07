@@ -15,7 +15,7 @@ public class TrendingRepoActivity extends BaseActivity {
 
     @Override
     public int getLayoutRes() {
-        return R.layout.activity_main;
+        return R.layout.trending_repo_activity;
     }
 
     @Override
