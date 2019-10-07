@@ -1,4 +1,4 @@
-package com.android.tech.trendingrepos.repofeature.di.module;
+package com.android.tech.trendingrepos.app.di.module;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

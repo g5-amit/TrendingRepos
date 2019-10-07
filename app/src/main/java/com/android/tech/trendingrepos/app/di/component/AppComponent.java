@@ -2,8 +2,10 @@ package com.android.tech.trendingrepos.app.di.component;
 
 import com.android.tech.trendingrepos.app.RepoApplication;
 import com.android.tech.trendingrepos.app.di.module.AppModule;
+import com.android.tech.trendingrepos.app.di.module.UtilModule;
 import com.android.tech.trendingrepos.app.di.scopes.AppScoped;
 import com.android.tech.trendingrepos.repofeature.di.module.ActivityModule;
+import com.android.tech.trendingrepos.repofeature.di.module.TrendingRepositoryModule;
 import com.android.tech.trendingrepos.repofeature.di.module.ViewModelModule;
 
 import dagger.BindsInstance;
@@ -19,8 +21,10 @@ import dagger.android.support.AndroidSupportInjectionModule;
  */
 @AppScoped
 @Component(modules = {AppModule.class,
+        UtilModule.class,
         ActivityModule.class,
         ViewModelModule.class,
+        TrendingRepositoryModule.class,
         AndroidSupportInjectionModule.class})
 public interface AppComponent extends AndroidInjector<RepoApplication>{
 
