@@ -42,7 +42,7 @@ public class TrendingRepoLocalSource implements ILocalTrendingRepo {
      */
     @NonNull
     @Override
-    public Single<List<TrendingRepoEntity>> getTrendingRepoList() {
+    public Single<List<TrendingRepoEntity>> getTrendingRepoList(boolean isForcedCall) {
         return mTrendingRepoDao.getTrendingRepoEntityList();
     }
 

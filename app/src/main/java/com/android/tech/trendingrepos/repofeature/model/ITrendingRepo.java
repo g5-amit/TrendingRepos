@@ -11,5 +11,5 @@ import io.reactivex.Single;
 public interface ITrendingRepo {
 
     @NonNull
-    Single<List<TrendingRepoEntity>> getTrendingRepoList();
+    Single<List<TrendingRepoEntity>> getTrendingRepoList(boolean isForcedCall);
 }

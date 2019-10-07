@@ -21,7 +21,7 @@ buildscript {
             'rx_android'          : '2.0.2',
             'rx_kotlin'           : '2.1.0',
             'retrofit'            : '2.3.0',
-            'okhttp'              : '3.8.1',
+            'okhttp'              : '3.9.0',
             'gsonVersion'         : '2.8.2',
             'gsonConverterVersion': '2.3.0',
             'android_arch'        : '1.1.1',
@@ -68,11 +68,13 @@ buildscript {
                     'rxkotlin' : "io.reactivex.rxjava2:rxkotlin:${versions.rx_kotlin}"
             ],
             square     : [
+
                     'retrofit'     : "com.squareup.retrofit2:retrofit:${versions.retrofit}",
                     'gsonConvertor': "com.squareup.retrofit2:converter-gson:${versions.gsonConverterVersion}",
                     'gson'         : "com.google.code.gson:gson:${versions.gsonVersion}",
                     'rxjava2'      : "com.squareup.retrofit2:adapter-rxjava2:${versions.retrofit}",
                     'okhttp'       : "com.squareup.okhttp3:okhttp:${versions.okhttp}",
+                    'logginginterceptor':"com.squareup.okhttp3:logging-interceptor:${versions.okhttp}"
             ],
             androidarch: [
                     'extensions'     : "android.arch.lifecycle:extensions:${versions.android_arch}",

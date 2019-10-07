@@ -22,7 +22,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Trending" />
+        android:text="@string/trending" />
 
     <ImageView
         android:id="@+id/view_more"
@@ -54,7 +54,7 @@
         app:layout_constraintTop_toBottomOf="@+id/thin_view">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_forecast"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="@dimen/margin_16dp"

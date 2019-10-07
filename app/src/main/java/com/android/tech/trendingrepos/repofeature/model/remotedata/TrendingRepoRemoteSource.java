@@ -31,7 +31,7 @@ public class TrendingRepoRemoteSource implements IRemoteTrendingRepo {
      */
     @NonNull
     @Override
-    public Single<List<TrendingRepoEntity>> getTrendingRepoList() {
+    public Single<List<TrendingRepoEntity>> getTrendingRepoList(boolean isForcedCall) {
         return mApiService.getRemoteTrendingRepos()
                 .map(this::parseTrendingRepoData);
 

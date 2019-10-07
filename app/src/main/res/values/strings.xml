@@ -5,4 +5,8 @@
     <string name="retry">Retry</string>
     <string name="no_trending_repo_found">No trending repo found</string>
     <string name="please_try_to_create_one_trending_repo_of_yours">Please try to create one trending repo of yours</string>
+    <string name="trending">Trending</string>
+    <string name="offline_data">Fetching offline data..</string>
+
+
 </resources>

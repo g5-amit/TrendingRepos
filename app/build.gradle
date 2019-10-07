@@ -21,7 +21,7 @@ android {
             minifyEnabled false
             useProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'API_BASE_URL', "\"http://api.apixu.com/v1/\""
+            buildConfigField 'String', 'API_BASE_URL', "\"https://github-trending-api.now.sh/\""
         }
 
         release {
@@ -70,6 +70,8 @@ dependencies {
     implementation deps.square.gson
     implementation deps.square.rxjava2
     implementation deps.square.okhttp
+    implementation deps.square.logginginterceptor
+
 
     // Android Architecture Component
     implementation deps.androidarch.extensions

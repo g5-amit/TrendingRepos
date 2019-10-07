@@ -4,8 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
 import com.android.tech.trendingrepos.repofeature.model.TrendingRepository;
+import com.android.tech.trendingrepos.repofeature.model.localdata.entities.TrendingRepoEntity;
+import com.android.tech.trendingrepos.repofeature.view.GitUiModel;
+
+import java.util.List;
 
 import javax.inject.Inject;
+
+import io.reactivex.Single;
 
 public class TrendingRepoViewModel extends ViewModel {
 
@@ -17,4 +23,15 @@ public class TrendingRepoViewModel extends ViewModel {
     public TrendingRepoViewModel(@NonNull TrendingRepository repository) {
         mRepository = repository;
     }
+
+    public Single<GitUiModel> getTrendingRepo(boolean isForcedCall) {
+        return mRepository.getTrendingRepoList(isForcedCall)
+                .map(this::constructUiData);
+    }
+
+    private GitUiModel constructUiData(List<TrendingRepoEntity> trendingRepoEntityList){
+        GitUiModel uiModel = new GitUiModel(trendingRepoEntityList);
+        return uiModel;
+    }
+
 }

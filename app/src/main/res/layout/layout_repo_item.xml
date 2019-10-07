@@ -62,7 +62,7 @@
         android:id="@+id/lang_color"
         android:layout_width="@dimen/margin_16dp"
         android:layout_height="@dimen/margin_16dp"
-        android:src="@color/soft_red"
+        android:background="@color/soft_red"
         android:layout_marginStart="@dimen/margin_20dp"
         android:layout_marginTop="@dimen/margin_8dp"
         app:layout_constraintLeft_toRightOf="@+id/avtar"
