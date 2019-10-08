@@ -45,7 +45,9 @@ public class TrendingRepoAdapter extends RecyclerView.Adapter<TrendingRepoAdapte
         if(!TextUtils.isEmpty(trendingRepo.getAvatar())) {
             Glide.with(mContext)
                     .load(trendingRepo.getAvatar())
-                    .apply(RequestOptions.circleCropTransform())
+                    .apply(RequestOptions.circleCropTransform()
+                            .placeholder(R.drawable.avtar_placeolder)
+                            .error(R.drawable.avtar_placeolder))
                     .into(holder.avtar);
         }
 

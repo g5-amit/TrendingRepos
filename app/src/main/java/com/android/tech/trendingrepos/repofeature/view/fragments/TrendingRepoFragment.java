@@ -1,12 +1,9 @@
 package com.android.tech.trendingrepos.repofeature.view.fragments;
 
-import android.animation.Animator;
-import android.animation.AnimatorInflater;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +13,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.tech.trendingrepos.R;
+import com.android.tech.trendingrepos.app.di.viewmodel.AppViewModelFactory;
 import com.android.tech.trendingrepos.app.utils.network.OnlineChecker;
 import com.android.tech.trendingrepos.app.view.BaseFragment;
-import com.android.tech.trendingrepos.app.di.viewmodel.AppViewModelFactory;
 import com.android.tech.trendingrepos.repofeature.model.localdata.entities.TrendingRepoEntity;
 import com.android.tech.trendingrepos.repofeature.view.GitUiModel;
 import com.android.tech.trendingrepos.repofeature.view.adapters.TrendingRepoAdapter;
@@ -105,7 +102,6 @@ public class TrendingRepoFragment extends BaseFragment {
     }
 
     private void swipeRefresh(){
-        swipeRefreshLayout.setRefreshing(false);
         fetchTrendingRepo(true);
     }
 
@@ -170,8 +166,10 @@ public class TrendingRepoFragment extends BaseFragment {
     }
 
     private void hideLoader(boolean isForcedCall) {
+        swipeRefreshLayout.setRefreshing(false);
         if(!isForcedCall)
             layout_loading.setVisibility(View.GONE);
+
     }
 
     @Override

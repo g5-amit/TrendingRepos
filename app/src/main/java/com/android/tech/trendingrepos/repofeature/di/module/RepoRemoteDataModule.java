@@ -20,9 +20,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 @Module
 public class RepoRemoteDataModule {
 
-    private static final int READ_TIMEOUT = 30;
-    private static final int WRITE_TIMEOUT = 120;
-    private static final int CONNECTION_TIMEOUT = 30;
+    private static final int READ_TIMEOUT = 15;
+    private static final int WRITE_TIMEOUT = 60;
+    private static final int CONNECTION_TIMEOUT = 15;
 
     @Provides
     @AppScoped
