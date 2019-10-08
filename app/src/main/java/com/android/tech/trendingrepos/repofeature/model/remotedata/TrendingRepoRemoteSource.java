@@ -57,7 +57,6 @@ public class TrendingRepoRemoteSource implements IRemoteTrendingRepo {
 
             trendingRepoEntityList.add(trendingRepoEntity);
         }
-
         return trendingRepoEntityList;
     }
 

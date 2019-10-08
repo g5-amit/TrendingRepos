@@ -65,7 +65,7 @@ public class TrendingRepository implements ILocalTrendingRepo {
                             }
                         }
                     }
-                    return Single.just(SortUtils.sortByNewest(data));
+                    return Single.just(data);
                 });
     }
 

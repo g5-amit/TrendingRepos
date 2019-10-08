@@ -1,5 +1,7 @@
 package com.android.tech.trendingrepos.repofeature.view.fragments;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.android.tech.trendingrepos.R;
 import com.android.tech.trendingrepos.app.di.viewmodel.AppViewModelFactory;
-import com.android.tech.trendingrepos.app.utils.network.OnlineChecker;
+import com.android.tech.trendingrepos.app.utils.network.NetworkUtils;
 import com.android.tech.trendingrepos.app.view.BaseFragment;
 import com.android.tech.trendingrepos.repofeature.model.localdata.entities.TrendingRepoEntity;
 import com.android.tech.trendingrepos.repofeature.view.GitUiModel;
@@ -52,12 +54,17 @@ public class TrendingRepoFragment extends BaseFragment {
 
     private CompositeDisposable mSubscription;
 
-    @Inject
-    public OnlineChecker mOnlineChecker;
+    private Activity mContext;
 
     @Inject
     public TrendingRepoFragment() {
 
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = (Activity) context;
     }
 
     @Override
@@ -85,7 +92,7 @@ public class TrendingRepoFragment extends BaseFragment {
         swipeRefreshLayout.setOnRefreshListener(this::swipeRefresh);
 
         trendingRepos = new ArrayList<>();
-        mAdapter = new TrendingRepoAdapter(getActivity(), trendingRepos);
+        mAdapter = new TrendingRepoAdapter(mContext, trendingRepos);
         recycler_view.setAdapter(mAdapter);
 
         button_retry.setOnClickListener(v -> {
@@ -108,7 +115,7 @@ public class TrendingRepoFragment extends BaseFragment {
     private void fetchTrendingRepo(boolean isForcedCall) {
         showLoader(isForcedCall);
 
-        if (!mOnlineChecker.isOnline()) {
+        if (!NetworkUtils.isNetworkAvailable(mContext)) {
             Snackbar.make(layout_loading, R.string.offline_data, Snackbar.LENGTH_SHORT).show();
         }
 

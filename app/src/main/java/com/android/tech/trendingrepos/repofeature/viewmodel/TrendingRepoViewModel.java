@@ -3,6 +3,7 @@ package com.android.tech.trendingrepos.repofeature.viewmodel;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.ViewModel;
 
+import com.android.tech.trendingrepos.app.utils.SortUtils;
 import com.android.tech.trendingrepos.repofeature.model.TrendingRepository;
 import com.android.tech.trendingrepos.repofeature.model.localdata.entities.TrendingRepoEntity;
 import com.android.tech.trendingrepos.repofeature.view.GitUiModel;
@@ -30,6 +31,7 @@ public class TrendingRepoViewModel extends ViewModel {
     }
 
     private GitUiModel constructUiData(List<TrendingRepoEntity> trendingRepoEntityList){
+        SortUtils.sortByStars(trendingRepoEntityList);
         GitUiModel uiModel = new GitUiModel(trendingRepoEntityList);
         return uiModel;
     }
