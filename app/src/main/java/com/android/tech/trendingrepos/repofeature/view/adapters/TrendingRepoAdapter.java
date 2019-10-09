@@ -10,8 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
+import androidx.constraintlayout.widget.Group;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.tech.trendingrepos.R;
@@ -58,10 +57,17 @@ public class TrendingRepoAdapter extends RecyclerView.Adapter<TrendingRepoAdapte
         holder.author.setText(trendingRepo.getAuthor()== null?"":trendingRepo.getAuthor());
         holder.name.setText(trendingRepo.getName()== null?"":trendingRepo.getName());
         holder.desc_with_url.setText(
-                String.format("%s%s", trendingRepo.getDescription() == null ? "" : trendingRepo.getDescription(), trendingRepo.getUrl() == null ? "" : trendingRepo.getUrl()));
+                String.format("%s%s", trendingRepo.getDescription() == null ? "" : trendingRepo.getDescription(), trendingRepo.getUrl() == null ? "" : "("+trendingRepo.getUrl()+")"));
         holder.lang.setText(trendingRepo.getLanguage()== null?"":trendingRepo.getLanguage());
         holder.star_value.setText(String.format("%s",trendingRepo.getStars()));
         holder.fork_value.setText(String.format("%s",trendingRepo.getForks()));
+
+        holder.repogroupDetails.setVisibility(trendingRepo.isExpanded ? View.VISIBLE : View.GONE);
+
+        holder.itemView.setOnClickListener(v -> {
+            trendingRepo.isExpanded = !trendingRepo.isExpanded;
+            holder.repogroupDetails.setVisibility(trendingRepo.isExpanded ? View.VISIBLE : View.GONE);
+        });
 
     }
 
@@ -70,14 +76,16 @@ public class TrendingRepoAdapter extends RecyclerView.Adapter<TrendingRepoAdapte
         return mListData.size();
     }
 
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+        private ImageView avtar,lang_color;
+        private TextView author,name,desc_with_url,lang,star_value,fork_value;
+        private Group repogroupDetails;
 
-        public ImageView avtar,lang_color;
-        public TextView author,name,desc_with_url,lang,star_value,fork_value;
-
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            repogroupDetails = itemView.findViewById(R.id.repogroupDetails);
 
             avtar = itemView.findViewById(R.id.avtar);
             lang_color = itemView.findViewById(R.id.lang_color);

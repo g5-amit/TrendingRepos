@@ -30,8 +30,9 @@ buildscript {
             'targetCompat'        : JavaVersion.VERSION_1_8,
 
             'junit'               : '4.12',
-            'runner'              : '1.0.2',
-            'espresso'            : '3.0.2',
+            'runner'              : '1.2.0',
+            'espresso'            : '3.2.0',
+            'mockito'             : '1.10.19',
             'roomVersion'         : '2.1.0-alpha04',
             'material'            : '1.0.0'
     ]
@@ -96,8 +97,10 @@ buildscript {
             ],
             test       : [
                     'junit'   : "junit:junit:${versions.junit}",
-                    'runner'  : "com.android.support.test:runner:${versions.runner}",
-                    'espresso': "com.android.support.test.espresso:espresso-core:${versions.espresso}"
+                    'runner'  : "androidx.test:runner:${versions.runner}",
+                    'rules'   : "androidx.test:rules:${versions.runner}",
+                    'espresso': "com.android.support.test.espresso:espresso-core:${versions.espresso}",
+                    'mockitoall':"org.mockito:mockito-all:${versions.mockito}"
             ]
     ]
 

@@ -51,6 +51,9 @@ public class TrendingRepoEntity {
 
     private Long timeStamp;
 
+    @Ignore
+    public boolean isExpanded;
+
     public Long getTimeStamp() {
         return timeStamp;
     }

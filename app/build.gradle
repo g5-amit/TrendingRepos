@@ -95,7 +95,9 @@ dependencies {
     //Test Cases
     testImplementation deps.test.junit
     androidTestImplementation deps.test.runner
+    androidTestImplementation deps.test.rules
     androidTestImplementation deps.test.espresso
+    testImplementation deps.test.mockitoall
 
 }
 

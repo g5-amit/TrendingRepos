@@ -50,6 +50,12 @@ public class GitHubRepo {
     @Expose
     private String languageColor;
 
+    public GitHubRepo(String author, String name, String avatar) {
+        this.author = author;
+        this.name = name;
+        this.avatar = avatar;
+    }
+
     public String getAuthor() {
         return author;
     }
