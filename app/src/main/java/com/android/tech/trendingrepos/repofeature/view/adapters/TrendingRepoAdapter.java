@@ -20,10 +20,14 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class TrendingRepoAdapter extends RecyclerView.Adapter<TrendingRepoAdapter.ViewHolder> {
 
     private Context mContext;
     private ArrayList<TrendingRepoEntity> mListData;
+    private int lastExpandedClickedPosition = -1;
 
     public TrendingRepoAdapter(Context activityContext, ArrayList<TrendingRepoEntity> trendingRepos) {
         mContext = activityContext;
@@ -62,11 +66,26 @@ public class TrendingRepoAdapter extends RecyclerView.Adapter<TrendingRepoAdapte
         holder.star_value.setText(String.format("%s",trendingRepo.getStars()));
         holder.fork_value.setText(String.format("%s",trendingRepo.getForks()));
 
-        holder.repogroupDetails.setVisibility(trendingRepo.isExpanded ? View.VISIBLE : View.GONE);
+
+        if(position == lastExpandedClickedPosition){
+            holder.repogroupDetails.setVisibility(VISIBLE);
+        }else{
+            holder.repogroupDetails.setVisibility(GONE);
+        }
 
         holder.itemView.setOnClickListener(v -> {
-            trendingRepo.isExpanded = !trendingRepo.isExpanded;
-            holder.repogroupDetails.setVisibility(trendingRepo.isExpanded ? View.VISIBLE : View.GONE);
+
+            int temp = lastExpandedClickedPosition;
+
+            if(position == lastExpandedClickedPosition){
+                lastExpandedClickedPosition = -1;
+                holder.repogroupDetails.setVisibility(GONE);
+            }else {
+                lastExpandedClickedPosition = position;
+                holder.repogroupDetails.setVisibility(VISIBLE);
+            }
+            notifyItemChanged(temp);
+
         });
 
     }

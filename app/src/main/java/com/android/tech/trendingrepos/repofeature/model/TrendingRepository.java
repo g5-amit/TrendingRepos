@@ -53,7 +53,7 @@ public class TrendingRepository implements ILocalTrendingRepo {
     public Single<List<TrendingRepoEntity>> getTrendingRepoList(boolean isForcedCall) {
         return mLocalDataSource.getTrendingRepoList(isForcedCall)
                 .flatMap(data -> {
-                    if (data.isEmpty() || isStale(data)) {
+                    if (data.isEmpty() || isStale(data) || isForcedCall) {
                         if (mOnlineChecker.isOnline()) {
                             return getFreshTrendingRepoList(isForcedCall);
                         } else {
@@ -109,12 +109,14 @@ public class TrendingRepository implements ILocalTrendingRepo {
      * Both sources are emptied, then new items are retrieved from querying the Remote Source
      * and finally, sources are replenished
      */
-    private Single<List<TrendingRepoEntity>> getFreshTrendingRepoList(boolean isForcedCall) {
-        if(!isForcedCall) {//Forced Call already did this operation
-            deleteTrendingRepoList();
-        }
+    public Single<List<TrendingRepoEntity>> getFreshTrendingRepoList(boolean isForcedCall) {
         return mRemoteDataSource.getTrendingRepoList(isForcedCall).
-                doOnSuccess(this::saveTrendingRepoList);
+                doOnSuccess(this::saveFreshTrendingRepoList);
+    }
+
+    private void saveFreshTrendingRepoList(@NonNull List<TrendingRepoEntity> trendingRepoEntityList) {
+        deleteTrendingRepoList();
+        saveTrendingRepoList(trendingRepoEntityList);
     }
 
 }

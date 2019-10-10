@@ -75,13 +75,14 @@ public class TrendingRepoViewModelTest {
     @Test
     public void forceUpdateRepos_updatesReposRepository() {
         // Given that the repo repository never emits
-        when(mRepository.getTrendingRepoList(true)).thenReturn(Single.never());
+        when(mRepository.getTrendingRepoList(true)).thenReturn(Single.just(REPOS));
 
         // When calling force update
-        mViewModel.getTrendingRepo(true);
+        mViewModel.getTrendingRepo(true).subscribe(mReposUISubscriber);
+        mReposUISubscriber.assertValueCount(1);
+        GitUiModel model = mReposUISubscriber.values().get(0);
+        assertGitUiModelWithReposVisible(model);
 
-        // The repos are refreshed in the repository
-        verify(mRepository).deleteTrendingRepoList();
     }
 
     private void assertGitUiModelWithReposVisible(GitUiModel model) {
