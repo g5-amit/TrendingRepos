@@ -88,6 +88,7 @@ public class TrendingRepositoryTest {
                 (mRemoteDataSource, mLocalDataSource, mOnlineChecker);
 
         mRepoTestSubscriber = new TestSubscriber<>();
+        mRepoEntityTestSubscriber = new TestSubscriber<>();
     }
 
     /**

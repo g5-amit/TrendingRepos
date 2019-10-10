@@ -65,7 +65,6 @@ public class TrendingRepoRemoteSourceTest {
         // trigger response
         mRemoteDataSource.getTrendingRepoList(false).toFlowable().subscribe(testSubscriber);
 
-
         testSubscriber.assertValue(parseTrendingRepoData(listRepos));
     }
 

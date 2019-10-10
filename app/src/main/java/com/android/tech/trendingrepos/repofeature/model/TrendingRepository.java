@@ -5,13 +5,10 @@ import androidx.annotation.NonNull;
 import com.android.tech.trendingrepos.app.di.scopes.AppScoped;
 import com.android.tech.trendingrepos.app.di.scopes.Local;
 import com.android.tech.trendingrepos.app.di.scopes.Remote;
-import com.android.tech.trendingrepos.app.utils.SortUtils;
 import com.android.tech.trendingrepos.app.utils.network.OnlineChecker;
 import com.android.tech.trendingrepos.repofeature.model.localdata.ILocalTrendingRepo;
-import com.android.tech.trendingrepos.repofeature.model.localdata.TrendingRepoLocalSource;
 import com.android.tech.trendingrepos.repofeature.model.localdata.entities.TrendingRepoEntity;
 import com.android.tech.trendingrepos.repofeature.model.remotedata.IRemoteTrendingRepo;
-import com.android.tech.trendingrepos.repofeature.model.remotedata.TrendingRepoRemoteSource;
 
 import java.util.List;
 
@@ -56,11 +53,11 @@ public class TrendingRepository implements ILocalTrendingRepo {
     public Single<List<TrendingRepoEntity>> getTrendingRepoList(boolean isForcedCall) {
         return mLocalDataSource.getTrendingRepoList(isForcedCall)
                 .flatMap(data -> {
-                    if (data.isEmpty() || isStale(data) || isForcedCall) {
-                        if(mOnlineChecker.isOnline()) {
+                    if (data.isEmpty() || isStale(data)) {
+                        if (mOnlineChecker.isOnline()) {
                             return getFreshTrendingRepoList(isForcedCall);
-                        }else{
-                            if(data.isEmpty()){
+                        } else {
+                            if (data.isEmpty()) {
                                 return null;
                             }
                         }
@@ -113,7 +110,9 @@ public class TrendingRepository implements ILocalTrendingRepo {
      * and finally, sources are replenished
      */
     private Single<List<TrendingRepoEntity>> getFreshTrendingRepoList(boolean isForcedCall) {
-        deleteTrendingRepoList();
+        if(!isForcedCall) {//Forced Call already did this operation
+            deleteTrendingRepoList();
+        }
         return mRemoteDataSource.getTrendingRepoList(isForcedCall).
                 doOnSuccess(this::saveTrendingRepoList);
     }

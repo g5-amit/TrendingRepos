@@ -8,7 +8,10 @@ import androidx.room.PrimaryKey;
 
 import com.android.tech.trendingrepos.repofeature.model.pojo.GitHubRepo;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
+import java.util.Objects;
 
 @Entity(tableName = "TrendingRepoEntity")
 public class TrendingRepoEntity {
@@ -153,5 +156,30 @@ public class TrendingRepoEntity {
 
     public boolean isUpToDate() {
         return System.currentTimeMillis() - timeStamp < STALE_TIME;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+
+        TrendingRepoEntity repo = (TrendingRepoEntity) obj;
+
+        return Objects.equals(url, repo.url);
+    }
+
+
+    @Override
+    public int hashCode() {
+        int result = url != null ? url.hashCode() : 0;
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        return result;
+    }
+
+    @NotNull
+    @Override
+    public String toString() {
+        return url;
     }
 }

@@ -26,6 +26,9 @@ public class TrendingRepoViewModel extends ViewModel {
     }
 
     public Single<GitUiModel> getTrendingRepo(boolean isForcedCall) {
+        if(isForcedCall) {
+            mRepository.deleteTrendingRepoList();
+        }
         return mRepository.getTrendingRepoList(isForcedCall)
                 .map(this::constructUiData);
     }
